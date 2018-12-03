@@ -5,7 +5,7 @@
         <h1>Vue Steakhouse</h1>
       </div>
       <div>
-        <d-button>
+        <d-button @click="showAddReviewModal = true">
           + Add Review
         </d-button>
       </div>
@@ -33,17 +33,20 @@
       <h3 slot="header">
         Review Count
       </h3>
-      <div slot="body">
-        <p class="text-grey-darker mb-2">Created in 2018 with 33 reviews</p>
-        <d-review-count
-          class="mb-1"
-          v-for="(reviewCount, index) in reviews.slice().reverse()"
-          :key="index"
-          :reviewCount="reviewCount.count"
-          :starCount="index + 1"
-          :totalReviews="totalReviews"/>
-      </div>
+      <p class="text-grey-darker mb-2">Created in 2018 with 33 reviews</p>
+      <d-review-count
+        class="mb-1"
+        v-for="(reviewCount, index) in reviews.slice().reverse()"
+        :key="index"
+        :reviewCount="reviewCount.count"
+        :starCount="starMap[index]"
+        :totalReviews="totalReviews"/>
     </d-modal>
+
+    <d-add-review-modal 
+      :show="showAddReviewModal"
+      @close="showAddReviewModal = false"
+      @addReviewClicked="addReview"/>
   </section>
 </template>
 
@@ -52,23 +55,27 @@
   import DIcon from '@/components/common/DIcon.vue';
   import DModal from '@/components/common/DModal.vue';
   import DReviewCount from '@/components/DReviewCount.vue';
+  import DAddReviewModal from '@/components/DAddReviewModal.vue';
 
   export default {
-    name: 'DTitleSection', 
+    name: 'DTitleSection',
     components: {
       DButton,
       DIcon,
       DModal,
       DReviewCount,
+      DAddReviewModal,
     },
     data() {
       return {
         showReviewCountModal: false,
+        showAddReviewModal: false,
         images: [
           'logo.png',
           'food.jpg',
           'table.jpg',
         ],
+        starMap: [5, 4, 3, 2, 1],
         reviews: [
           {
             count: 1,
@@ -97,6 +104,13 @@
       totalReviews() {
         return this.reviews.map(review => review.count)
           .reduce((total, sum) => total + sum);
+      }
+    },
+    methods: {
+      addReview(review) {
+        console.log(review);
+        // TODO: add review
+        this.showAddReviewModal = false;
       }
     }
   }

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <!-- TODO: fix this -->
+    <!-- TODO: fix this transition -->
     <transition name="fade">
-      <div class="bg-black pin-l pin-t w-full h-full fixed opacity-90" 
+      <div class="bg-black pin-l pin-t w-full h-full fixed opacity-90"
         @click="$emit('close')"
         v-if="show"></div>
     </transition>
     <div class="modal fixed pin-x mx-auto bg-white rounded shadow-md border w-1/3 z-10"
       v-if="show">
-      <div class="bg-grey-lighter p-3">
+      <div class="bg-grey-lighter p-3" v-if="$slots.header">
         <slot name="header"></slot>
       </div>
       <div class="p-3">
-        <slot name="body"></slot>
+        <slot></slot>
       </div>
       <div v-if="$slots.footer" class="p-3 bg-grey-lighter">
         <slot name="footer"></slot>

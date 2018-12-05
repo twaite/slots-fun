@@ -11,6 +11,7 @@
       </div>
     </div>
     <div class="flex items-center">
+      <!-- TODO: make into it's own component -->
       <d-icon 
         name="star"
         v-for="n in 5" 
@@ -24,8 +25,8 @@
     <div class="flex justify-center">
       <!-- TODO: iterate --> 
       <img src="@/assets/logo.png" class="bg-white rounded shadow app-image hover:shadow-lg">
-      <img src="@/assets/food.jpg" class="bg-white rounded shadow app-image hover:shadow-lg">
-      <img src="@/assets/table.jpg" class="bg-white rounded shadow app-image hover:shadow-lg">
+      <img src="/food.jpg" class="bg-white rounded shadow app-image hover:shadow-lg">
+      <img src="/table.jpg" class="bg-white rounded shadow app-image hover:shadow-lg">
     </div>
 
     <!-- Reviews Modal -->

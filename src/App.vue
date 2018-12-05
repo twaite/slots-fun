@@ -1,20 +1,29 @@
 <template>
   <div id="app">
     <d-header/>
-    <d-title-section></d-title-section>
+    <d-loader>
+      <template slot-scope="{ data }">
+        <d-title-section/>
+        <d-reviews-section :reviews="data.reviews"/>
+      </template>
+    </d-loader>
   </div>
 </template>
 
 <script>
 import DHeader from '@/components/common/DHeader.vue';
+import DLoader from '@/components/common/DLoader.vue';
 import DTitleSection from '@/components/DTitleSection.vue';
+import DReviewsSection from '@/components/DReviewSection.vue';
 
 export default {
   name: 'app',
   components: {
     DHeader,
-    DTitleSection
-  }
+    DTitleSection,
+    DReviewsSection,
+    DLoader,
+  },
 }
 </script>
 

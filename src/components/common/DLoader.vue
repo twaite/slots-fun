@@ -1,27 +1,26 @@
 <template>
   <div>
-    <h3 v-if="loading" class="p-3">Loading...</h3>
-    <slot v-else :data="data"></slot>
+    <slot :data="data" :loading="loading"></slot>
   </div>
 </template>
-
 
 <script>
   import { reviews } from '@/data.js';
 
   export default {
     name: 'DLoader',
+    props: {
+      getData: Function, // Returns a promise
+    },
     data() {
       return {
         loading: true,
         data: {},
       };
     },
-    created() {
-      setTimeout(() => {
-        this.loading = false
-        this.data = { reviews };
-      }, 1000);
+    async created() {
+      this.data = await this.getData();
+      this.loading = false;
     }
   }
 </script>

@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-grey-lighter">
     <d-header/>
     <d-loader>
       <template slot-scope="{ data }">
-        <d-title-section/>
+        <d-title-section @addReview="addReview"/>
         <d-reviews-section :reviews="data.reviews"/>
       </template>
     </d-loader>
@@ -24,6 +24,11 @@ export default {
     DReviewsSection,
     DLoader,
   },
+  methods: {
+    addReview(reviews) {
+
+    }
+  }
 }
 </script>
 

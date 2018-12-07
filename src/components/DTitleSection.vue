@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-grey-lighter p-5">
+  <section class="p-5">
     <div class="flex items-center">
       <div class="flex-1">
         <h1>Vue Steakhouse</h1>

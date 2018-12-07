@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="p-4">
     <div v-for="review in reviews" :key="review.id"
-      class="m-4 p-4 rounded shadow border hover:shadow-md">
+      class="p-4 mb-4 bg-white rounded shadow border hover:shadow-md">
       <div class="flex">
         <img :src="`/${review.user.avatar}`"
           class="block h-16 w-16 rounded-full mb-4 mr-4"
@@ -10,15 +10,13 @@
           class="block h-16 w-16 rounded-full mb-4 mr-4"
           v-else>
         <div>
-          <d-icon 
-            name="star"
-            v-for="n in 5" 
-            :color="n <= review.stars ? 'black' : 'grey'"
-            :key="n"/>
-          <div class="flex">
-            <h4 class="mb-2">{{review.user.name}}</h4>
-            <span class="mx-2">on</span>
-            {{review.createdAt}}
+          <div class="flex pb-2 items-center">
+            <d-icon 
+              name="star"
+              v-for="n in 5" 
+              :color="n <= review.stars ? 'black' : 'grey'"
+              :key="n"/>
+            <strong class="ml-2 mr-1">{{review.user.name}}</strong> on {{review.createdAt}}
           </div>
           <div class="leading-normal">
             {{review.text}}

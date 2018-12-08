@@ -1,10 +1,10 @@
 <template>
-  <div id="app" class="bg-grey-lighter min-h-screen flex flex-col">
+  <div id="app">
     <d-header/>
-    <d-loader :getData="getReviews" class="flex flex-col flex-grow justify-center">
+    <d-loader :getData="getReviews" class="main">
       <template slot-scope="{ data, loading }">
         <d-spinner v-if="loading"/>
-        <div v-else>
+        <div v-else class="max-w-app">
           <d-title-section/>
           <d-reviews-section :reviews="data"/>
         </div>
@@ -49,5 +49,13 @@ export default {
 
 * {
   font-family: 'Noto Sans JP', sans-serif;
+}
+
+#app {
+  @apply bg-grey-lighter min-h-screen flex flex-col;
+}
+
+.main {
+  @apply flex flex-col flex-grow justify-center items-center;
 }
 </style>

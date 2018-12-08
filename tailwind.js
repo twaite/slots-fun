@@ -603,6 +603,7 @@ module.exports = {
     '3xl': '80rem',
     '4xl': '90rem',
     '5xl': '100rem',
+    'app': '1024px',
     'full': '100%',
     '90': '90%',
   },

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO: fix this transition -->
     <transition name="fade">
       <div v-if="show">
         <div class="backdrop"
@@ -33,7 +32,7 @@
   }
 </script>
 
-<style lang="postcss" scope>
+<style lang="postcss">
 .modal {
   top: 50%;
   transform: translateY(-50%);

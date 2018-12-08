@@ -1,5 +1,5 @@
 <template>
-  <section class="p-5">
+  <section class="py-4">
     <div class="flex items-center">
       <div class="flex-1">
         <h1>Vue Steakhouse</h1>
@@ -11,12 +11,12 @@
       </div>
     </div>
     <div class="flex items-center">
-      <!-- TODO: make into it's own component -->
-      <d-icon 
+      <!-- <d-icon 
         name="star"
         v-for="n in 5" 
         :color="n <= averageStars ? 'black' : 'grey'"
-        :key="n"/>
+        :key="n"/> -->
+      <d-stars :stars="averageStars"/>
       <span class="text-grey-dark ml-3 hover:underline cursor-pointer"
         @click="showReviewCountModal = true">
         {{totalReviews}} Reviews
@@ -57,15 +57,16 @@
   import DModal from '@/components/common/DModal.vue';
   import DReviewCount from '@/components/DReviewCount.vue';
   import DAddReviewModal from '@/components/DAddReviewModal.vue';
+  import DStars from '@/components/DStars.vue';
 
   export default {
     name: 'DTitleSection',
     components: {
       DButton,
-      DIcon,
       DModal,
       DReviewCount,
       DAddReviewModal,
+      DStars,
     },
     data() {
       return {

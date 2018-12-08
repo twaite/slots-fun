@@ -3,11 +3,7 @@
     <div slot="header">
       <h3>Add a Review</h3>
     </div>
-    <d-icon
-      name="star"
-      v-for="n in 5"
-      color="grey"
-      :key="n"/>
+    <d-stars :highlight="true" class="pb-2" v-model="review.stars"/>
     <textarea v-model="review.text" class="w-full border rounded" rows="3"/>
     <div slot="footer">
       <div class="flex justify-end">
@@ -24,14 +20,14 @@
 
 <script>
 import DModal from './common/DModal.vue';
-import DIcon from  './common/DIcon.vue';
 import DButton from './common/DButton.vue';
+import DStars from '@/components/DStars.vue';
 
 export default {
   name: 'DAddReview',
   components: {
     DModal,
-    DIcon,
+    DStars,
     DButton,
   },
   props: {

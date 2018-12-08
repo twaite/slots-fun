@@ -11,25 +11,18 @@
       </div>
     </div>
     <div class="flex items-center">
-      <!-- <d-icon 
-        name="star"
-        v-for="n in 5" 
-        :color="n <= averageStars ? 'black' : 'grey'"
-        :key="n"/> -->
-      <d-stars :stars="averageStars"/>
+      <d-stars :value="averageStars"/>
       <span class="text-grey-dark ml-3 hover:underline cursor-pointer"
         @click="showReviewCountModal = true">
         {{totalReviews}} Reviews
       </span>
     </div>
-    <div class="flex justify-center">
-      <!-- TODO: iterate --> 
-      <img src="@/assets/logo.png" class="bg-white rounded shadow app-image hover:shadow-lg">
-      <img src="/food.jpg" class="bg-white rounded shadow app-image hover:shadow-lg">
-      <img src="/table.jpg" class="bg-white rounded shadow app-image hover:shadow-lg">
+    <div class="images">
+      <img v-for="image in images" :key="image" :src="image" class="app-image">
     </div>
 
     <!-- Reviews Modal -->
+    <!-- TODO: move this to it's own component -->
     <d-modal :show="showReviewCountModal" @close="showReviewCountModal = false">
       <h3 slot="header">
         Review Count
@@ -73,9 +66,9 @@
         showReviewCountModal: false,
         showAddReviewModal: false,
         images: [
-          'logo.png',
-          'food.jpg',
-          'table.jpg',
+          '/logo.png',
+          '/food.jpg',
+          '/table.jpg',
         ],
         starMap: [5, 4, 3, 2, 1],
         reviews: [
@@ -118,7 +111,11 @@
   }
 </script>
 
-<style>
+<style lang="postcss">
+  .images {
+    @apply flex flex-wrap justify-center py-5;
+  }
+
   .app-image {
     transition: transform .2s, box-shadow .2s;
     max-width: 200px;
@@ -126,8 +123,10 @@
     height: auto;
     width: auto;
     margin: .25em;
+    @apply bg-white rounded shadow app-image;
   }
   .app-image:hover {
     transform: scale(1.1);
+    @apply shadow-lg;
   }
 </style>

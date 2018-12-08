@@ -821,6 +821,7 @@ module.exports = {
 
   svgFill: {
     'current': 'currentColor',
+    'red': '#e3342f',
   },
 
 

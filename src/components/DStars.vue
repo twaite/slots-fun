@@ -1,10 +1,12 @@
 <template>
   <div class="stars">
-    <d-icon 
+    <d-icon
       name="star"
-      v-for="n in 5" 
-      :color="n <= stars ? 'black' : 'grey'"
-      :key="n"/>
+      :class="{'highlight': highlight}"
+      v-for="n in 5"
+      :color="n <= value ? highlight ? 'red' : 'black' : 'grey'"
+      :key="n"
+      @click.native="$emit('input', n)"/>
   </div>
 </template>
 
@@ -14,10 +16,14 @@
   export default {
     name: 'DStars',
     props: {
-      stars: Number,
+      value: Number,
+      highlight: Boolean,
     },
     components: {
       DIcon,
+    },
+    methods: {
+
     }
   }
 </script>
@@ -26,5 +32,14 @@
 <style lang="postcss" scoped>
   .stars {
     @apply flex;
+  }
+
+  /* prev siblings should be red */
+  .stars:hover .highlight {
+    @apply cursor-pointer fill-red;
+  }
+  /* .stars .highlight:hover, */
+  .stars .highlight:hover ~ .highlight {
+    fill: grey;
   }
 </style>

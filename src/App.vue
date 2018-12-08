@@ -56,6 +56,6 @@ export default {
 }
 
 .main {
-  @apply flex flex-col flex-grow justify-center items-center;
+  @apply flex flex-col flex-grow justify-center items-center mx-4;
 }
 </style>

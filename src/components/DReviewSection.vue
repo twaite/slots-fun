@@ -11,7 +11,7 @@
           v-else>
         <div>
           <div class="review-card__header">
-            <d-stars :stars="review.stars"/>
+            <d-stars :value="review.stars"/>
             <strong class="ml-2 mr-1">{{review.user.name}}</strong> on {{review.createdAt}}
           </div>
           <div class="review-card__body">
@@ -50,7 +50,7 @@
 }
 
 .review-card__header {
-  @apply flex pb-2 items-center;
+  @apply flex pb-2 items-center flex-wrap;
 }
 
 .review-card__body {

@@ -21,6 +21,27 @@ export const store = new Vuex.Store({
       }
     ]
   },
+  getters: {
+    totalReviews: state => {
+      return state.reviews.length;
+    },
+    reviewCounts: state => {
+      const counts = {
+        5: 0, 4: 0, 3: 0, 2: 0, 1: 0,
+      };
+
+      state.reviews.forEach(review => {
+        counts[review.stars]++;
+      });
+
+      return counts;
+    },
+    averageStars: state => {
+      const reviewCountMapped = state.reviews.map(review => review.stars);
+      const totalStarCount = reviewCountMapped.reduce((total, sum, index) => total + (sum * (index + 1)));
+      return Math.floor(totalStarCount/state.reviews.length);
+    }
+  },
   mutations: {
     addReview(state, review) {
       state.reviews.unshift(review);

@@ -22,18 +22,17 @@
     </div>
 
     <!-- Reviews Modal -->
-    <!-- TODO: move this to it's own component -->
     <d-modal :show="showReviewCountModal" @close="showReviewCountModal = false">
       <h3 slot="header">
         Review Count
       </h3>
-      <p class="text-grey-darker mb-2">Created in 2018 with 33 reviews</p>
+      <p class="text-grey-darker mb-2">Created in 2018 with {{totalReviews}} reviews</p>
       <d-review-count
         class="mb-1"
-        v-for="(reviewCount, index) in reviews.slice().reverse()"
-        :key="index"
-        :reviewCount="reviewCount.count"
-        :starCount="starMap[index]"
+        v-for="(value, key) in reviewCounts"
+        :key="key"
+        :reviewCount="value"
+        :starCount="Number(key)"
         :totalReviews="totalReviews"/>
     </d-modal>
 
@@ -51,7 +50,7 @@
   import DReviewCount from '@/components/DReviewCount.vue';
   import DAddReviewModal from '@/components/DAddReviewModal.vue';
   import DStars from '@/components/DStars.vue';
-  import { mapActions } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     name: 'DTitleSection',
@@ -78,15 +77,11 @@
       }
     },
     computed: {
-      averageStars() {
-        const reviewCountMapped = this.reviews.map(review => review.stars);
-        const totalStarCount = reviewCountMapped.reduce((total, sum, index) => total + (sum * (index + 1)));
-        return Math.floor(totalStarCount/this.totalReviews);
-      },
-      totalReviews() {
-        return this.reviews.map(review => review.stars)
-          .reduce((total, sum) => total + sum);
-      }
+      ...mapGetters([
+        'totalReviews',
+        'reviewCounts',
+        'averageStars',
+      ]),
     },
     methods: {
       ...mapActions([

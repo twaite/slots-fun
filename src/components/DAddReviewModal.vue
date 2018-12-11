@@ -10,7 +10,7 @@
         <d-button @click="$emit('close')">
           Cancel
         </d-button>
-        <d-button class="ml-2" @click="$emit('addReviewClicked', review)">
+        <d-button class="ml-2" @click="addReviewClicked">
           Add
         </d-button>
       </div>
@@ -40,8 +40,25 @@ export default {
       review: {
         text: '',
         stars: 0,
+        createdAt: '12/11/18',
+        user: {
+          name: 'Workshop User'
+        }
       }
     };
   },
+  methods: {
+    addReviewClicked() {
+      this.$emit('addReviewClicked', this.review);
+      this.review = {
+        text: '',
+        stars: 0,
+        createdAt: '12/11/18',
+        user: {
+          name: 'Workshop User'
+        }
+      };
+    }
+  }
 }
 </script>

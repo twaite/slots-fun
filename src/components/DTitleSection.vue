@@ -37,10 +37,10 @@
         :totalReviews="totalReviews"/>
     </d-modal>
 
-    <d-add-review-modal 
+    <d-add-review-modal
       :show="showAddReviewModal"
       @close="showAddReviewModal = false"
-      @addReviewClicked="addReview"/>
+      @addReviewClicked="addReviewAndCloseModal"/>
   </section>
 </template>
 
@@ -51,6 +51,7 @@
   import DReviewCount from '@/components/DReviewCount.vue';
   import DAddReviewModal from '@/components/DAddReviewModal.vue';
   import DStars from '@/components/DStars.vue';
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'DTitleSection',
@@ -60,6 +61,9 @@
       DReviewCount,
       DAddReviewModal,
       DStars,
+    },
+    props: {
+      reviews: Array,
     },
     data() {
       return {
@@ -71,42 +75,27 @@
           '/table.jpg',
         ],
         starMap: [5, 4, 3, 2, 1],
-        reviews: [
-          {
-            count: 1,
-          },
-          {
-            count: 5,
-          },
-          {
-            count: 3
-          },
-          {
-            count: 3
-          },
-          {
-            count: 21
-          }
-        ]
       }
     },
     computed: {
       averageStars() {
-        const reviewCountMapped = this.reviews.map(review => review.count);
+        const reviewCountMapped = this.reviews.map(review => review.stars);
         const totalStarCount = reviewCountMapped.reduce((total, sum, index) => total + (sum * (index + 1)));
         return Math.floor(totalStarCount/this.totalReviews);
       },
       totalReviews() {
-        return this.reviews.map(review => review.count)
+        return this.reviews.map(review => review.stars)
           .reduce((total, sum) => total + sum);
       }
     },
     methods: {
-      addReview(review) {
-        console.log(review);
-        // TODO: add review
+      ...mapActions([
+        'addReview',
+      ]),
+      addReviewAndCloseModal(review) {
+        this.addReview(review);
         this.showAddReviewModal = false;
-      }
+      },
     }
   }
 </script>

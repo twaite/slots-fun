@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot :data="data" :loading="loading"></slot>
+    <slot :loading="loading"></slot>
   </div>
 </template>
 
@@ -15,7 +15,6 @@
     data() {
       return {
         loading: true,
-        data: {},
       };
     },
     async created() {

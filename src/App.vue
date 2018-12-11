@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <d-header/>
-    <d-loader :getData="getReviews" class="main">
-      <template slot-scope="{ data, loading }">
+    <d-loader :getData="loadData" class="main">
+      <template slot-scope="{ loading }">
         <d-spinner v-if="loading"/>
         <div v-else class="max-w-app">
-          <d-title-section/>
-          <d-reviews-section :reviews="data"/>
+          <d-title-section :reviews="$store.state.reviews"/>
+          <d-reviews-section :reviews="$store.state.reviews"/>
         </div>
       </template>
     </d-loader>
@@ -20,6 +20,7 @@ import DTitleSection from '@/components/DTitleSection.vue';
 import DReviewsSection from '@/components/DReviewSection.vue';
 import DSpinner from '@/components/common/DSpinner.vue';
 import { reviews } from '@/data.js';
+import { mapActions } from 'vuex'
 
 export default {
   name: 'app',
@@ -31,14 +32,10 @@ export default {
     DSpinner,
   },
   methods: {
-    getReviews() {
-      return new Promise((resolve, rejected) => {
-        setTimeout(() => {
-          resolve(reviews)
-        }, 2000);
-      });
-    }
-  }
+    ...mapActions([
+      'loadData',
+    ]),
+  },
 }
 </script>
 
